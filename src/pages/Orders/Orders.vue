@@ -46,4 +46,4 @@ export default {
 };
 </script>
 
-<style src="./Basic.scss" lang="scss"></style>
+<style src="./Orders.scss" lang="scss"></style>

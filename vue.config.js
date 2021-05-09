@@ -1,6 +1,3 @@
 module.exports = {
-  "transpileDependencies": [
-    "vuetify"
-  ],
-  publicPath: '/material-vue/'
-}
+  transpileDependencies: ["vuetify"],
+};

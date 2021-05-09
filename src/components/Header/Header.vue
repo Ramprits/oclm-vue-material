@@ -122,10 +122,10 @@
       </template>
       <v-list>
         <div class="text-h5 grey--text text--darken-3 px-4 pt-4">
-          John Smith
+          {{ user.username }}
         </div>
         <div class="subtitle-2 primary--text font-weight-regular px-4">
-          Flatlogic.com
+          {{ user.email }}
         </div>
         <v-list-item-group color="primary">
           <v-list-item v-for="(item, i) in account" :key="i">
@@ -157,7 +157,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapGetters } from "vuex";
 import config from "../../config";
 import Search from "@/components/Search/Search";
 
@@ -234,6 +234,7 @@ export default {
         return this.drawer;
       },
     },
+    ...mapGetters(["user"]),
   },
   methods: {
     ...mapActions(["TOGGLE_DRAWER"]),

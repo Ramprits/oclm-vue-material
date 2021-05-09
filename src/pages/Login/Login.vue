@@ -62,14 +62,11 @@
                             <v-col>
                               <v-text-field
                                 v-model="email"
-                                :rules="emailRules"
-                                value="admin@flatlogic.com"
                                 label="Email Address"
                                 required
                               ></v-text-field>
                               <v-text-field
                                 v-model="password"
-                                :rules="passRules"
                                 type="password"
                                 label="Password"
                                 hint="At least 6 characters"
@@ -121,19 +118,14 @@
                           <v-form>
                             <v-col>
                               <v-text-field
-                                v-model="createFullName"
                                 label="Full Name"
                                 required
                               ></v-text-field>
                               <v-text-field
-                                v-model="createEmail"
-                                :rules="emailRules"
                                 label="Email Address"
                                 required
                               ></v-text-field>
                               <v-text-field
-                                v-model="createPassword"
-                                :rules="passRules"
                                 type="password"
                                 label="Password"
                                 hint="At least 6 characters"
@@ -141,17 +133,7 @@
                               ></v-text-field>
                             </v-col>
                             <v-col class="d-flex justify-space-between">
-                              <v-btn
-                                large
-                                block
-                                :disabled="
-                                  createFullName.length === 0 ||
-                                    createEmail.length === 0 ||
-                                    createPassword === 0
-                                "
-                                color="primary"
-                                @click="login"
-                              >
+                              <v-btn large block color="primary" @click="login">
                                 Create your account</v-btn
                               >
                             </v-col>
@@ -187,9 +169,9 @@
             <v-col cols="12" class="d-flex justify-center">
               <v-footer>
                 <div class="primary--text">
-                  © 2014-2020
+                  © 2014-2021
                   <a href="https://flatlogic.com/" class="text-decoration-none"
-                    >Flatlogic</a
+                    >O'connell</a
                   >, LLC. All rights reserved.
                 </div>
               </v-footer>
@@ -202,35 +184,19 @@
 </template>
 
 <script>
+import { LOGIN } from "../../store/constant.js";
 export default {
   name: "Login",
   data() {
-    return {
-      email: "admin@flatlogic.com",
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+/.test(v) || "E-mail must be valid",
-      ],
-      createFullName: "John Smith",
-      createEmail: "john@flatlogic.com",
-      createPassword: "123456",
-      password: "123456",
-      passRules: [
-        (v) => !!v || "Password is required",
-        (v) => v.length >= 6 || "Min 6 characters",
-      ],
-    };
+    return { email: "", password: "" };
   },
   methods: {
     login() {
-      window.localStorage.setItem("authenticated", true);
-      this.$router.push("/dashboard");
+      this.$store.dispatch(LOGIN, {
+        identifier: this.email,
+        password: this.password,
+      });
     },
-  },
-  created() {
-    if (window.localStorage.getItem("authenticated") === "true") {
-      this.$router.push("/dashboard");
-    }
   },
 };
 </script>

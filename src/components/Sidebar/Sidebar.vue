@@ -98,7 +98,7 @@ export default {
     return {
       items: [
         { title: "Dashboard", icon: "mdi-home", link: "/dashboard" },
-        { title: "Tables", icon: "mdi-grid-large", link: "/tables" },
+        { title: "Work Order", icon: "mdi-grid-large", link: "/orders" },
       ],
       sidebarWidth: 240,
       sidebarMinWidth: 96,
