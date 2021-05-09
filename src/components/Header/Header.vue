@@ -121,11 +121,14 @@
         </v-btn>
       </template>
       <v-list>
-        <div class="text-h5 grey--text text--darken-3 px-4 pt-4">
-          {{ user?.username }}
+        <div class="text-h5 grey--text text--darken-3 px-4 pt-4" v-if="user">
+          {{ user.username }}
         </div>
-        <div class="subtitle-2 primary--text font-weight-regular px-4">
-          {{ user?.email }}
+        <div
+          class="subtitle-2 primary--text font-weight-regular px-4"
+          v-if="user"
+        >
+          {{ user.email }}
         </div>
         <v-list-item-group color="primary">
           <v-list-item v-for="(item, i) in account" :key="i">
