@@ -10,7 +10,7 @@ import "vue-toastification/dist/index.css";
 
 Vue.use(Toast);
 
-axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+axios.defaults.baseURL = process.env.VUE_APP_API_URL || "http://localhost:1337";
 if (store.getters["token"]) {
   axios.defaults.headers.common[
     "Authorization"

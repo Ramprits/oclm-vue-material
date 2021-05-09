@@ -8,11 +8,13 @@ import {
   LOAD_USER,
   LOG_OUT,
 } from "../constant";
+
 const state = {
   user: null,
-  token: null,
-  isAuthenticated: false,
+  token: localStorage.getItem("token"),
+  isAuthenticated: !!localStorage.getItem("token"),
 };
+
 const actions = {
   [LOGIN]({ commit }, { identifier, password }) {
     axios
