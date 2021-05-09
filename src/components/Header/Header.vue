@@ -122,10 +122,10 @@
       </template>
       <v-list>
         <div class="text-h5 grey--text text--darken-3 px-4 pt-4">
-          {{ user.username }}
+          {{ user?.username }}
         </div>
         <div class="subtitle-2 primary--text font-weight-regular px-4">
-          {{ user.email }}
+          {{ user?.email }}
         </div>
         <v-list-item-group color="primary">
           <v-list-item v-for="(item, i) in account" :key="i">
@@ -147,7 +147,7 @@
             outlined
             color="primary"
             class="text-capitalize"
-            @click="logOut"
+            @click.once="logOut"
             >Sign Out
           </v-btn>
         </div>
@@ -160,6 +160,7 @@
 import { mapActions, mapState, mapGetters } from "vuex";
 import config from "../../config";
 import Search from "@/components/Search/Search";
+import { LOG_OUT } from "../../store/constant";
 
 export default {
   name: "Header",
@@ -239,8 +240,7 @@ export default {
   methods: {
     ...mapActions(["TOGGLE_DRAWER"]),
     logOut: function() {
-      window.localStorage.setItem("authenticated", false);
-      this.$router.push("/login");
+      this.$store.dispatch(LOG_OUT);
     },
   },
 };

@@ -4,3 +4,4 @@ export const SET_ERROR = "setError";
 export const IS_LOADING = "isLoading";
 export const LOGIN = "login";
 export const REGISTER = "register";
+export const LOG_OUT = "logOut";

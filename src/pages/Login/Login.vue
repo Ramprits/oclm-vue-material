@@ -118,22 +118,29 @@
                           <v-form>
                             <v-col>
                               <v-text-field
-                                label="Full Name"
+                                label="Username"
                                 required
+                                v-model="RegisterUsername"
                               ></v-text-field>
                               <v-text-field
                                 label="Email Address"
                                 required
+                                v-model="RegisterEmail"
                               ></v-text-field>
                               <v-text-field
                                 type="password"
                                 label="Password"
-                                hint="At least 6 characters"
+                                v-model="RegisterPassword"
                                 required
                               ></v-text-field>
                             </v-col>
                             <v-col class="d-flex justify-space-between">
-                              <v-btn large block color="primary" @click="login">
+                              <v-btn
+                                large
+                                block
+                                color="primary"
+                                @click="register"
+                              >
                                 Create your account</v-btn
                               >
                             </v-col>
@@ -184,17 +191,30 @@
 </template>
 
 <script>
-import { LOGIN } from "../../store/constant.js";
+import { LOGIN, REGISTER } from "../../store/constant.js";
 export default {
   name: "Login",
   data() {
-    return { email: "", password: "" };
+    return {
+      email: "",
+      password: "",
+      RegisterUsername: "",
+      RegisterEmail: "",
+      RegisterPassword: "",
+    };
   },
   methods: {
     login() {
       this.$store.dispatch(LOGIN, {
         identifier: this.email,
         password: this.password,
+      });
+    },
+    register() {
+      this.$store.dispatch(REGISTER, {
+        username: this.RegisterUsername,
+        email: this.RegisterEmail,
+        password: this.RegisterPassword,
       });
     },
   },

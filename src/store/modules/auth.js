@@ -1,10 +1,17 @@
 import axios from "axios";
 import router from "@/Routes";
-import { LOGIN, REGISTER, SET_ERROR, SET_USER, LOAD_USER } from "../constant";
+import {
+  LOGIN,
+  REGISTER,
+  SET_ERROR,
+  SET_USER,
+  LOAD_USER,
+  LOG_OUT,
+} from "../constant";
 const state = {
-  user: JSON.parse(localStorage.getItem("user")),
-  token: localStorage.getItem("token"),
-  isAuthenticated: !!localStorage.getItem("token"),
+  user: null,
+  token: null,
+  isAuthenticated: false,
 };
 const actions = {
   [LOGIN]({ commit }, { identifier, password }) {
@@ -32,13 +39,13 @@ const actions = {
         password,
       })
       .then((response) => {
-        router.push("/dashboard");
         localStorage.setItem("token", response.data.jwt);
         localStorage.setItem("user", JSON.stringify(response.data.user));
-        return commit(SET_USER, response.data);
+        commit(SET_USER, response.data);
+        router.push("/dashboard");
       })
       .catch((error) => {
-        return commit(SET_ERROR, error.message);
+        commit(SET_ERROR, error.message);
       });
   },
 
@@ -49,6 +56,10 @@ const actions = {
   [SET_ERROR]({ commit }, payload) {
     commit(SET_ERROR, payload);
   },
+
+  [LOG_OUT]({ commit }) {
+    commit(LOG_OUT);
+  },
 };
 const mutations = {
   [SET_USER](state, payload) {
@@ -58,6 +69,14 @@ const mutations = {
   },
   [SET_ERROR](state, payload) {
     state.error = payload;
+  },
+  [LOG_OUT](state) {
+    state.user = null;
+    state.token = null;
+    state.isAuthenticated = false;
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    router.push("/login");
   },
 };
 const getters = {
