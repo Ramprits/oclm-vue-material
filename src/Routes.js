@@ -48,7 +48,6 @@ const router = new Router({
 });
 
 router.beforeEach(function(to, _, next) {
-  console.log(store.getters["authenticated"]);
   if (to.meta.requiresAuth && !store.getters["authenticated"]) {
     next("/login");
   } else if (to.meta.requiresUnAuth && store.getters["authenticated"]) {
