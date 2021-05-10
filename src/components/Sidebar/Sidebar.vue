@@ -98,7 +98,14 @@ export default {
     return {
       items: [
         { title: "Dashboard", icon: "mdi-home", link: "/dashboard" },
-        { title: "Work Order", icon: "mdi-grid-large", link: "/orders" },
+        { title: "Work Order", icon: "mdi-message-text", link: "/orders" },
+        { title: "Field Agent", icon: "mdi-dialpad", link: "/fieldAgents" },
+        { title: "Report", icon: "mdi-call-split", link: "/report" },
+        {
+          title: "Settings",
+          icon: "mdi-arrow-up-bold-box-outline",
+          link: "/settings",
+        },
       ],
       sidebarWidth: 240,
       sidebarMinWidth: 96,
