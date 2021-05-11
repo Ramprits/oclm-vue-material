@@ -5,8 +5,6 @@
     v-model="DRAWER_STATE"
     :mini-variant="!DRAWER_STATE"
     :width="sidebarWidth"
-    :permanent="$vuetify.breakpoint.mdAndUp"
-    :temporary="$vuetify.breakpoint.smAndDown"
     :mini-variant-width="sidebarMinWidth"
     :class="{ 'drawer-mini': !DRAWER_STATE }"
   >
